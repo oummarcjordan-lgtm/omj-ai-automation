@@ -464,17 +464,57 @@ section {
   padding-bottom: 140px;
 }
 
-.contact-email {
-  display: inline-block;
+.contact-actions {
   margin-top: 32px;
-  font-family: var(--font-display);
-  font-size: clamp(1.4rem, 3.5vw, 2rem);
-  font-weight: 600;
-  color: var(--accent);
-  border-bottom: 2px solid var(--accent);
-  padding-bottom: 4px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
 }
-.contact-email:hover { opacity: 0.85; }
+
+.contact-btn {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px 24px;
+  min-width: 260px;
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+.contact-btn:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+}
+
+.contact-btn-icon {
+  font-size: 1.3rem;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.contact-btn-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.contact-btn-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.contact-btn-value {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.contact-btn-whatsapp .contact-btn-icon { color: #25D366; }
 
 .contact-links {
   margin-top: 32px;
