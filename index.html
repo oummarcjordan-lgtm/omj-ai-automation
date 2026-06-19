@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OMJ — AI Automation Specialist</title>
+<meta name="description" content="I build AI-powered automation systems — workflows, bots, and intelligent web apps that run your business while you sleep.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<canvas id="node-canvas"></canvas>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="#top" class="logo">OMJ<span class="logo-dot">.</span></a>
+    <nav class="nav-links">
+      <a href="#work">Work</a>
+      <a href="#services">Services</a>
+      <a href="#process">Process</a>
+      <a href="#contact" class="nav-cta">Start a project</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="eyebrow">AI Automation Specialist</p>
+      <h1 class="hero-title">
+        I connect your tools<br>
+        so your business <span class="accent">runs itself.</span>
+      </h1>
+      <p class="hero-sub">
+        Custom AI workflows, automation pipelines, and intelligent bots —
+        built for businesses who'd rather scale than spend nights on repetitive work.
+      </p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn btn-primary">Start a project</a>
+        <a href="#work" class="btn btn-ghost">See the work</a>
+      </div>
+    </div>
+    <div class="hero-flow" aria-hidden="true">
+      <div class="flow-node flow-input">
+        <span class="flow-label">INPUT</span>
+        <span class="flow-value">Order form</span>
+      </div>
+      <div class="flow-line flow-line-1"></div>
+      <div class="flow-node flow-process">
+        <span class="flow-label">AUTOMATE</span>
+        <span class="flow-value">n8n + Claude</span>
+      </div>
+      <div class="flow-line flow-line-2"></div>
+      <div class="flow-node flow-output">
+        <span class="flow-label">OUTPUT</span>
+        <span class="flow-value">Done. No hands.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORK / CASE STUDIES -->
+  <section class="work" id="work">
+    <p class="section-eyebrow">Selected work</p>
+    <h2 class="section-title">Built, shipped, running.</h2>
+
+    <div class="case-grid">
+
+      <article class="case-card">
+        <div class="case-tag">Sports analytics platform</div>
+        <h3>OMJ Pronos</h3>
+        <p>A betting insights platform with real-time AI match analysis via the Claude API, dark UI, and a tiered monetization model — free content plus a paid VIP channel.</p>
+        <ul class="case-stack">
+          <li>Claude API</li>
+          <li>Real-time data</li>
+          <li>Monetization logic</li>
+        </ul>
+      </article>
+
+      <article class="case-card">
+        <div class="case-tag">Conversational automation</div>
+        <h3>OMJ Assistant Bot</h3>
+        <p>A Telegram bot wired into an n8n automation backend — handling responses, routing tasks, and acting as the front door for a larger automation stack.</p>
+        <ul class="case-stack">
+          <li>Telegram API</li>
+          <li>n8n</li>
+          <li>Workflow orchestration</li>
+        </ul>
+      </article>
+
+      <article class="case-card">
+        <div class="case-tag">Digital product pipeline</div>
+        <h3>Self-publishing system</h3>
+        <p>An automated content pipeline — from generation to formatted ebook to storefront listing — cutting manual production time to near zero.</p>
+        <ul class="case-stack">
+          <li>Python</li>
+          <li>ReportLab</li>
+          <li>Automated packaging</li>
+        </ul>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- SERVICES (as modules) -->
+  <section class="services" id="services">
+    <p class="section-eyebrow">What I build</p>
+    <h2 class="section-title">Modules you can combine.</h2>
+    <p class="section-sub">Every business needs a different mix. Here's what's available — pick what fits, or let me design the stack.</p>
+
+    <div class="module-grid">
+      <div class="module">
+        <span class="module-mark">AI</span>
+        <h3>AI-powered web apps</h3>
+        <p>Sites and tools with real intelligence built in — not a chatbot bolted on, but AI woven into the core logic.</p>
+      </div>
+      <div class="module">
+        <span class="module-mark">⟲</span>
+        <h3>Workflow automation</h3>
+        <p>n8n pipelines that connect your tools and kill repetitive manual work — quotes, onboarding, reporting, follow-ups.</p>
+      </div>
+      <div class="module">
+        <span class="module-mark">→</span>
+        <h3>Bots & assistants</h3>
+        <p>Telegram, WhatsApp, and web-based bots that handle support, sales, or operations on their own schedule.</p>
+      </div>
+      <div class="module">
+        <span class="module-mark">◇</span>
+        <h3>Web development</h3>
+        <p>Fast, modern sites and apps — the foundation everything else runs on, built clean from the start.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="process" id="process">
+    <p class="section-eyebrow">How it works</p>
+    <h2 class="section-title">Three conversations, one system.</h2>
+
+    <div class="process-flow">
+      <div class="process-step">
+        <h3>Map</h3>
+        <p>We look at what's eating your time — the repetitive, manual, error-prone parts of your operation.</p>
+      </div>
+      <div class="process-step">
+        <h3>Build</h3>
+        <p>I design and build the automation or app — with regular check-ins, not a black box you wait on.</p>
+      </div>
+      <div class="process-step">
+        <h3>Run</h3>
+        <p>It ships, it runs, and I stay close for the first weeks to tune it against real usage.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <p class="section-eyebrow">Let's talk</p>
+    <h2 class="section-title">Tell me what's slowing you down.</h2>
+    <p class="section-sub">A short message is enough to start. I reply within a day.</p>
+
+    <a href="mailto:contact@omjwebdev.com" class="contact-email">contact@omjwebdev.com</a>
+
+    <div class="contact-links">
+      <a href="#" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="#" target="_blank" rel="noopener">GitHub</a>
+      <a href="#" target="_blank" rel="noopener">Upwork</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <p>OMJ — AI Automation Specialist. Built from Yaoundé, working worldwide.</p>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
