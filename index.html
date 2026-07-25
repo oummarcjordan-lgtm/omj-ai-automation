@@ -1,404 +1,110 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OMJ — AI Automation Specialist</title>
-<meta name="description" content="I build AI-powered automation systems — workflows, bots, and intelligent web apps that run your business while you sleep.">
-<link rel="canonical" href="https://oummarcjordan-lgtm.github.io/omj-ai-automation/">
-
-<meta property="og:title" content="OMJ — AI Automation Specialist">
-<meta property="og:description" content="Custom AI workflows, automation pipelines, and intelligent bots — built for businesses who'd rather scale than spend nights on repetitive work.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://oummarcjordan-lgtm.github.io/omj-ai-automation/">
-
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="OMJ — AI Automation Specialist">
-<meta name="twitter:description" content="Custom AI workflows, automation pipelines, and intelligent bots for growing businesses.">
-
-
+<title>OMJ Web Développement — IT, Digital & Automatisation IA à Yaoundé</title>
+<meta name="description" content="Développement web, applications mobiles, automatisation IA, design graphique et cybersécurité — par Marc Jordan Oum, OMJ Web Développement, Yaoundé, Cameroun.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+<div id="preloader">
+  <div class="loader-track"><div class="loader-icon">💻</div></div>
+  <p class="loader-text">Chargement…</p>
+</div>
+
 <canvas id="node-canvas"></canvas>
 
-<header class="nav">
+<nav class="nav">
   <div class="nav-inner">
-    <a href="#top" class="logo">OMJ<span class="logo-dot">.</span></a>
-    <nav class="nav-links">
-      <a href="#services">Services</a>
-      <a href="#pricing">Pricing</a>
-      <a href="#process">Process</a>
-      <a href="#contact" class="nav-cta">Start a project</a>
-    </nav>
+    <a href="index.html" class="logo">OMJ<span class="logo-dot">.</span></a>
+    <div class="nav-links">
+      <a href="services.html">Services</a>
+      <a href="projets.html">Projets</a>
+      <a href="guides.html">Guides</a>
+      <a href="profil.html">Profil</a>
+      <a href="contact.html" class="nav-cta">Me contacter</a>
+    </div>
+  </div>
+</nav>
+
+<header class="photo-hero">
+  <div class="photo-hero-bg" style="background-image:url('images/hero-accueil.jpg')"></div>
+  <canvas id="brain-canvas"></canvas>
+  <div class="photo-hero-overlay"></div>
+  <div class="photo-hero-content">
+    <p class="eyebrow">IT, Digital &amp; Automatisation IA — Yaoundé, Cameroun</p>
+    <h1 class="hero-title">Un problème numérique ?<br><span class="accent">Une solution qui marche.</span></h1>
+    <p class="hero-sub">Sites web, applications mobiles, automatisation IA, design graphique et cybersécurité — une seule adresse pour digitaliser sérieusement votre activité.</p>
+    <div class="hero-actions">
+      <a href="services.html" class="btn btn-primary">Voir mes services</a>
+      <a href="contact.html" class="btn btn-ghost">Me contacter</a>
+    </div>
   </div>
 </header>
 
-<main id="top">
-
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-inner">
-      <p class="eyebrow">AI Automation Specialist</p>
-      <h1 class="hero-title">
-        I connect your tools<br>
-        so your business <span class="accent">runs itself.</span>
-      </h1>
-      <p class="hero-sub">
-        Custom AI workflows, automation pipelines, and intelligent bots —
-        built for businesses who'd rather scale than spend nights on repetitive work.
-      </p>
-      <div class="hero-actions">
-        <a href="#contact" class="btn btn-primary">Start a project</a>
-        <a href="#services" class="btn btn-ghost">See what I build</a>
-      </div>
+<section id="flow">
+  <p class="section-eyebrow">Ma méthode</p>
+  <h2 class="section-title">De votre besoin à la solution livrée.</h2>
+  <div class="hero-flow">
+    <div class="flow-node">
+      <span class="flow-label">INPUT</span>
+      <span class="flow-value">Votre besoin</span>
     </div>
-    <div class="hero-flow" aria-hidden="true">
-      <div class="flow-node flow-input">
-        <span class="flow-label">INPUT</span>
-        <span class="flow-value">Order form</span>
-      </div>
-      <div class="flow-line flow-line-1"></div>
-      <div class="flow-node flow-process">
-        <span class="flow-label">AUTOMATE</span>
-        <span class="flow-value">n8n + Claude</span>
-      </div>
-      <div class="flow-line flow-line-2"></div>
-      <div class="flow-node flow-output">
-        <span class="flow-label">OUTPUT</span>
-        <span class="flow-value">Done. No hands.</span>
-      </div>
+    <div class="flow-line flow-line-1"></div>
+    <div class="flow-node flow-process">
+      <span class="flow-label">AUTOMATE</span>
+      <span class="flow-value">OMJ Web Développement</span>
     </div>
-  </section>
-
-  <!-- SERVICES (as modules) -->
-  <section class="services" id="services">
-    <p class="section-eyebrow">What I build</p>
-    <h2 class="section-title">Modules you can combine.</h2>
-    <p class="section-sub">Every business needs a different mix. Here's what's available — pick what fits, or let me design the stack.</p>
-
-    <div class="module-grid">
-      <div class="module">
-        <span class="module-mark">AI</span>
-        <h3>AI-powered web apps</h3>
-        <p>Sites and tools with real intelligence built in — not a chatbot bolted on, but AI woven into the core logic.</p>
-      </div>
-      <div class="module">
-        <span class="module-mark">⟲</span>
-        <h3>Workflow automation</h3>
-        <p>n8n pipelines that connect your tools and kill repetitive manual work — quotes, onboarding, reporting, follow-ups.</p>
-      </div>
-      <div class="module">
-        <span class="module-mark">→</span>
-        <h3>Bots & assistants</h3>
-        <p>Telegram, WhatsApp, and web-based bots that handle support, sales, or operations on their own schedule.</p>
-      </div>
-      <div class="module">
-        <span class="module-mark">◇</span>
-        <h3>Web development</h3>
-        <p>Fast, modern sites and apps — the foundation everything else runs on, built clean from the start.</p>
-      </div>
-      <div class="module">
-        <span class="module-mark">▣</span>
-        <h3>App store setup</h3>
-        <p>Google Play and Apple Developer accounts, set up properly under your own name — so your app, and the credit, stay yours.</p>
-      </div>
+    <div class="flow-line flow-line-2"></div>
+    <div class="flow-node flow-output">
+      <span class="flow-label">OUTPUT</span>
+      <span class="flow-value">Solution livrée</span>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- PRICING -->
-  <section class="pricing" id="pricing">
-    <p class="section-eyebrow">Investment</p>
-    <h2 class="section-title">Pricing that scales with the project.</h2>
-    <p class="section-sub">Every business is different, so these are starting ranges. The exact quote depends on scope — you'll always know the number before any work begins.</p>
+<section id="teaser">
+  <p class="section-eyebrow">Explorer</p>
+  <h2 class="section-title">Trois façons de travailler avec moi.</h2>
+  <div class="card-grid" style="margin-top:48px;">
+    <a href="services.html" class="price-card">
+      <h4>Services</h4>
+      <p class="price-desc">Web, apps, IA &amp; automatisation, design, réseau &amp; cybersécurité, consultation — tarifs détaillés.</p>
+    </a>
+    <a href="projets.html" class="price-card">
+      <h4>Projets</h4>
+      <p class="price-desc">Des réalisations concrètes pour des clients réels, au Cameroun et ailleurs.</p>
+    </a>
+    <a href="guides.html" class="price-card">
+      <h4>Guides</h4>
+      <p class="price-desc">8 guides pratiques pour apprendre l'IA, l'automatisation, le développement et l'entrepreneuriat digital.</p>
+    </a>
+  </div>
+</section>
 
-    <div class="pricing-grid">
-      <div class="price-card">
-        <h3>Bot / Assistant</h3>
-        <p class="price-range">$150 <span>–</span> $400</p>
-        <p class="price-desc">A Telegram, WhatsApp, or web bot that handles a defined task — support, orders, FAQs.</p>
-      </div>
-      <div class="price-card price-card-featured">
-        <span class="price-badge">Most requested</span>
-        <h3>Workflow Automation</h3>
-        <p class="price-range">$250 <span>–</span> $700</p>
-        <p class="price-desc">An n8n pipeline connecting your tools — quotes, onboarding, reporting, follow-ups, on autopilot.</p>
-      </div>
-      <div class="price-card">
-        <h3>AI-Powered Website</h3>
-        <p class="price-range">$400 <span>–</span> $1,200</p>
-        <p class="price-desc">A site or web app with real AI logic built in — not a template with a chatbot stuck on top.</p>
-      </div>
-      <div class="price-card">
-        <h3>App Store Setup</h3>
-        <p class="price-range">$60 <span>–</span> $150</p>
-        <p class="price-desc">Google Play or Apple Developer account, created and verified properly under your own name — plus first publish.</p>
-      </div>
+<section id="trust">
+  <p class="section-eyebrow">Confiance</p>
+  <h2 class="section-title">Ce que mes clients en disent.</h2>
+  <div class="trust-grid">
+    <div class="trust-card">
+      <p>« Un travail sérieux, livré dans les temps, avec un vrai suivi après la mise en ligne. »</p>
+      <cite>— Martial, client</cite>
     </div>
-
-    <p class="pricing-note">Need something that doesn't fit these boxes? <a href="#contact">Tell me what you're working with</a> — most projects are a mix. <span class="pricing-note-sub">App Store Setup pricing excludes official platform fees (paid directly by you to Google/Apple).</span></p>
-  </section>
-
-  <!-- TRUST -->
-  <section class="trust" id="trust">
-    <p class="section-eyebrow">From recent clients</p>
-    <h2 class="section-title">Short projects, real feedback.</h2>
-
-    <div class="trust-grid">
-      <blockquote class="trust-card">
-        <p>"Exactly what we needed — fast, clear communication, and it just worked."</p>
-        <cite>— E-commerce site project</cite>
-      </blockquote>
-      <blockquote class="trust-card">
-        <p>"Saved us hours every week we used to spend on manual order handling."</p>
-        <cite>— WhatsApp ordering automation</cite>
-      </blockquote>
+    <div class="trust-card">
+      <p>« Exactement ce qu'il fallait pour digitaliser mon activité sans complications techniques. »</p>
+      <cite>— Baverly, cliente</cite>
     </div>
-  </section>
-
-  <!-- PROCESS -->
-  <section class="process" id="process">
-    <p class="section-eyebrow">How it works</p>
-    <h2 class="section-title">Three conversations, one system.</h2>
-
-    <div class="process-flow">
-      <div class="process-step">
-        <h3>Map</h3>
-        <p>We look at what's eating your time — the repetitive, manual, error-prone parts of your operation.</p>
-      </div>
-      <div class="process-step">
-        <h3>Build</h3>
-        <p>I design and build the automation or app — with regular check-ins, not a black box you wait on.</p>
-      </div>
-      <div class="process-step">
-        <h3>Run</h3>
-        <p>It ships, it runs, and I stay close for the first weeks to tune it against real usage.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section class="contact" id="contact">
-    <p class="section-eyebrow">Let's talk</p>
-    <h2 class="section-title">Tell me what's slowing you down.</h2>
-    <p class="section-sub">A short message is enough to start. I reply within a day.</p>
-
-    <div class="contact-actions">
-      <a href="https://wa.me/237688578748" target="_blank" rel="noopener" class="contact-btn contact-btn-whatsapp">
-        <span class="contact-btn-icon">●</span>
-        <span class="contact-btn-text">
-          <span class="contact-btn-label">WhatsApp</span>
-          <span class="contact-btn-value">+237 6 88 57 87 48</span>
-        </span>
-      </a>
-      <a href="mailto:oummarcjordan@gmail.com" class="contact-btn contact-btn-email">
-        <span class="contact-btn-icon">✉</span>
-        <span class="contact-btn-text">
-          <span class="contact-btn-label">Email</span>
-          <span class="contact-btn-value">oummarcjordan@gmail.com</span>
-        </span>
-      </a>
-    </div>
-
-    <div class="contact-links">
-      <a href="#" target="_blank" rel="noopener">LinkedIn</a>
-      <a href="#" target="_blank" rel="noopener">GitHub</a>
-      <a href="#" target="_blank" rel="noopener">Upwork</a>
-    </div>
-  </section>
-
-</main>
+  </div>
+</section>
 
 <footer class="footer">
-  <p>OMJ — AI Automation Specialist. Built from Yaoundé, working worldwide.</p>
+  <p>OMJ Web Développement — Yaoundé, Cameroun · 688 578 748 · oummarcjordan@gmail.com</p>
 </footer>
 
 <script src="main.js"></script>
-  <section id="omj-ebooks" class="omje-section">
-  <div class="omje-header">
-    <p class="omje-eyebrow">GUIDES OMJ · 2026</p>
-    <h2 class="omje-title">Des guides qui te <span class="omje-accent-cyan">rapportent</span>,<br>pas juste qui se lisent.</h2>
-    <p class="omje-subtitle">100% mobile. 100% actionnable. Pensés pour l'Afrique.</p>
-  </div>
-
-  <div class="omje-grid">
-
-    <!-- CARTE 1 : Bots & IA -->
-    <article class="omje-card">
-      <div class="omje-imgwrap">
-        <img src="ebook-bots-ia.png" alt="Guide Créer des Bots & IA Autonomes" loading="lazy">
-      </div>
-      <div class="omje-body">
-        <h3 class="omje-cardtitle">Créer des Bots &amp; IA Autonomes</h3>
-        <p class="omje-carddesc">3 niveaux progressifs, sans coder au départ, pour construire des bots qui travaillent pendant que tu dors.</p>
-        <div class="omje-price-row">
-          <span class="omje-price-old">15 000 FCFA</span>
-          <span class="omje-price-new">8 000 FCFA</span>
-        </div>
-        <a href="https://aktddcjj.mychariow.com/prd_y7pywwav" class="omje-btn omje-btn-purple" target="_blank" rel="noopener">Acheter maintenant</a>
-      </div>
-    </article>
-
-    <!-- CARTE 2 : Gagner de l'argent avec l'IA -->
-    <article class="omje-card">
-      <div class="omje-imgwrap">
-        <img src="ebook-argent-ia.png" alt="Guide Gagner de l'Argent en ligne grâce à l'IA" loading="lazy">
-      </div>
-      <div class="omje-body">
-        <h3 class="omje-cardtitle">Gagner de l'Argent grâce à l'IA</h3>
-        <p class="omje-carddesc">15+ méthodes prouvées : freelance IA, contenu, micro-tâches, ebooks, automatisation.</p>
-        <div class="omje-price-row">
-          <span class="omje-price-old">8 000 FCFA</span>
-          <span class="omje-price-new">6 000 FCFA</span>
-        </div>
-        <a href="https://aktddcjj.mychariow.com/prd_zz6iqwec" class="omje-btn omje-btn-gold" target="_blank" rel="noopener">Acheter maintenant</a>
-      </div>
-    </article>
-
-    <!-- CARTE 3 : Site Web Gratuit -->
-    <article class="omje-card">
-      <div class="omje-imgwrap">
-        <img src="ebook-site-web.png" alt="Guide Comment Créer un Site Web Gratuit en 7 Étapes" loading="lazy">
-      </div>
-      <div class="omje-body">
-        <h3 class="omje-cardtitle">Site Web Gratuit en 7 Étapes</h3>
-        <p class="omje-carddesc">100% gratuit, 100% mobile. Ton site en ligne en une journée, sans ordinateur.</p>
-        <div class="omje-price-row">
-          <span class="omje-price-old">7 000 FCFA</span>
-          <span class="omje-price-new">4 000 FCFA</span>
-        </div>
-        <a href="https://aktddcjj.mychariow.com/prd_m7znh6ng" class="omje-btn omje-btn-teal" target="_blank" rel="noopener">Acheter maintenant</a>
-      </div>
-    </article>
-
-  </div>
-
-  <!-- CARTE PACK — mise en avant -->
-  <article class="omje-pack">
-    <div class="omje-pack-badge">MEILLEURE OFFRE</div>
-    <div class="omje-pack-imgwrap">
-      <img src="pack-complet.png" alt="Pack complet des 3 guides OMJ" loading="lazy">
-    </div>
-    <div class="omje-pack-body">
-      <h3 class="omje-pack-title">Le Pack Complet — 3 Guides</h3>
-      <p class="omje-pack-desc">Bots &amp; IA, Gagner de l'Argent, Site Web Gratuit. Tout ce qu'il te faut pour démarrer et monétiser, dans un seul pack.</p>
-      <ul class="omje-pack-list">
-        <li>Valeur normale : <strong>31 000 FCFA</strong></li>
-        <li>Prix des 3 en individuel : <strong>18 000 FCFA</strong></li>
-        <li>Prix pack aujourd'hui : <strong>15 000 FCFA</strong></li>
-      </ul>
-      <div class="omje-price-row omje-price-row-pack">
-        <span class="omje-price-old">18 000 FCFA</span>
-        <span class="omje-price-new omje-price-new-big">15 000 FCFA</span>
-      </div>
-      <a href="https://aktddcjj.mychariow.com/prd_t7otu9k6" class="omje-btn omje-btn-pack" target="_blank" rel="noopener">Obtenir le pack complet</a>
-    </div>
-  </article>
-
-</section>
-
-<style>
-.omje-section{
-  --omje-bg:#05070c;
-  --omje-panel:#0c1018;
-  --omje-border:#1c2433;
-  --omje-cyan:#22d3ee;
-  --omje-purple:#8b5cf6;
-  --omje-gold:#f5b700;
-  --omje-teal:#2dd4a7;
-  --omje-text:#e8ecf1;
-  --omje-muted:#8a94a6;
-  background:var(--omje-bg);
-  padding:64px 20px 80px;
-  max-width:1180px;
-  margin:0 auto;
-  font-family:'Segoe UI',Arial,sans-serif;
-  color:var(--omje-text);
-}
-.omje-header{text-align:center;max-width:620px;margin:0 auto 44px;}
-.omje-eyebrow{
-  font-size:12px;letter-spacing:3px;font-weight:700;
-  color:var(--omje-gold);margin:0 0 12px;text-transform:uppercase;
-}
-.omje-title{
-  font-size:30px;line-height:1.25;font-weight:800;margin:0 0 12px;
-  letter-spacing:-0.3px;
-}
-.omje-accent-cyan{color:var(--omje-cyan);}
-.omje-subtitle{color:var(--omje-muted);font-size:15px;margin:0;}
-
-.omje-grid{
-  display:grid;grid-template-columns:1fr;gap:24px;margin-bottom:32px;
-}
-@media(min-width:820px){
-  .omje-grid{grid-template-columns:repeat(3,1fr);}
-}
-
-.omje-card{
-  background:var(--omje-panel);
-  border:1px solid var(--omje-border);
-  border-radius:16px;
-  overflow:hidden;
-  display:flex;flex-direction:column;
-  transition:transform .2s ease, border-color .2s ease;
-}
-.omje-card:hover{transform:translateY(-4px);border-color:var(--omje-cyan);}
-.omje-imgwrap{width:100%;background:#000;}
-.omje-imgwrap img{width:100%;display:block;}
-.omje-body{padding:20px 20px 24px;display:flex;flex-direction:column;flex:1;}
-.omje-cardtitle{font-size:17px;font-weight:700;margin:0 0 8px;}
-.omje-carddesc{font-size:13.5px;color:var(--omje-muted);line-height:1.5;margin:0 0 16px;flex:1;}
-
-.omje-price-row{display:flex;align-items:baseline;gap:10px;margin-bottom:16px;}
-.omje-price-old{font-size:14px;color:var(--omje-muted);text-decoration:line-through;}
-.omje-price-new{font-size:20px;font-weight:800;color:#fff;}
-.omje-price-new-big{font-size:26px;color:var(--omje-gold);}
-
-.omje-btn{
-  display:block;text-align:center;padding:13px 20px;border-radius:10px;
-  font-weight:700;font-size:14.5px;text-decoration:none;color:#05070c;
-  transition:opacity .2s ease;
-}
-.omje-btn:hover{opacity:.88;}
-.omje-btn-purple{background:var(--omje-purple);color:#fff;}
-.omje-btn-gold{background:var(--omje-gold);}
-.omje-btn-teal{background:var(--omje-teal);}
-
-.omje-pack{
-  position:relative;
-  background:linear-gradient(160deg,#12131f,#0c1018);
-  border:1.5px solid var(--omje-gold);
-  border-radius:20px;
-  overflow:hidden;
-  display:grid;grid-template-columns:1fr;
-  box-shadow:0 0 40px rgba(245,183,0,0.08);
-}
-@media(min-width:820px){
-  .omje-pack{grid-template-columns:1fr 1.1fr;align-items:stretch;}
-}
-.omje-pack-badge{
-  position:absolute;top:18px;left:18px;z-index:2;
-  background:var(--omje-gold);color:#05070c;
-  font-size:11px;font-weight:800;letter-spacing:1.5px;
-  padding:6px 14px;border-radius:999px;
-}
-.omje-pack-imgwrap{background:#000;}
-.omje-pack-imgwrap img{width:100%;display:block;}
-.omje-pack-body{padding:32px 28px;display:flex;flex-direction:column;justify-content:center;}
-.omje-pack-title{font-size:22px;font-weight:800;margin:0 0 10px;}
-.omje-pack-desc{font-size:14.5px;color:var(--omje-muted);line-height:1.55;margin:0 0 18px;}
-.omje-pack-list{list-style:none;padding:0;margin:0 0 22px;font-size:14px;color:var(--omje-muted);display:flex;flex-direction:column;gap:6px;}
-.omje-pack-list strong{color:#fff;}
-.omje-price-row-pack{margin-bottom:20px;}
-.omje-btn-pack{
-  background:var(--omje-gold);
-  font-size:16px;padding:16px 24px;
-}
-      </style>
 </body>
-</html>
+  </html>
