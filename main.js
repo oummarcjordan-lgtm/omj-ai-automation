@@ -64,50 +64,104 @@ window.addEventListener('load', () => {
 })();
 
 /* ============================================
-   CANVAS "CERVEAU NUMÉRIQUE" — binaire structuré
-   (page d'accueil uniquement)
+   CANVAS "MATÉRIALISATION" — particules qui forment
+   la silhouette de la photo de profil (page d'accueil)
    ============================================ */
 (function initBrainCanvas() {
   const canvas = document.getElementById('brain-canvas');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
-  let w, h, columns;
+  const imgSrc = canvas.dataset.particleSrc || 'images/hero-accueil.jpg';
+
+  let w, h, particles = [];
+  let ready = false;
+  const img = new Image();
 
   function resize() {
     const rect = canvas.parentElement.getBoundingClientRect();
     w = canvas.width = rect.width;
     h = canvas.height = rect.height;
-    const colWidth = 22;
-    const count = Math.ceil(w / colWidth);
-    columns = Array.from({ length: count }, (_, i) => ({
-      x: i * colWidth,
-      y: Math.random() * -h,
-      speed: 0.4 + Math.random() * 0.8,
-      chars: Array.from({ length: Math.ceil(h / 20) + 4 }, () => (Math.random() > 0.5 ? '1' : '0')),
-    }));
+    if (ready) buildParticles();
+  }
+
+  function buildParticles() {
+    // Dessine la photo (en mode "cover", comme le fond CSS) sur un canvas caché
+    const off = document.createElement('canvas');
+    off.width = w;
+    off.height = h;
+    const octx = off.getContext('2d');
+
+    const scale = Math.max(w / img.width, h / img.height);
+    const iw = img.width * scale;
+    const ih = img.height * scale;
+    const ix = (w - iw) / 2;
+    const iy = (h - ih) * 0.2; // aligné avec "background-position: center 20%"
+    octx.drawImage(img, ix, iy, iw, ih);
+
+    let data;
+    try {
+      data = octx.getImageData(0, 0, w, h).data;
+    } catch (e) {
+      return; // image bloquée (CORS) : pas d'effet particules, la photo de fond reste visible
+    }
+
+    const isMobile = window.innerWidth < 640;
+    const gap = isMobile ? 6 : 4;
+    const maxParticles = isMobile ? 1400 : 3200;
+
+    const next = [];
+    for (let y = 0; y < h; y += gap) {
+      for (let x = 0; x < w; x += gap) {
+        const i = (y * w + x) * 4;
+        const a = data[i + 3];
+        if (a < 100) continue;
+        const brightness = (data[i] + data[i + 1] + data[i + 2]) / 3;
+        if (brightness < 45) continue; // ignore les zones trop sombres du fond
+        next.push({
+          tx: x,
+          ty: y,
+          x: Math.random() * w,
+          y: Math.random() * h,
+          size: 0.8 + Math.random() * 1.3,
+          speed: 0.015 + Math.random() * 0.035,
+          alpha: 0.2 + (brightness / 255) * 0.65,
+        });
+      }
+    }
+
+    // Limite le nombre de particules pour rester fluide sur mobile
+    if (next.length > maxParticles) {
+      for (let i = next.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [next[i], next[j]] = [next[j], next[i]];
+      }
+      next.length = maxParticles;
+    }
+    particles = next;
   }
 
   function step() {
-    ctx.fillStyle = 'rgba(6, 12, 18, 0.15)';
-    ctx.fillRect(0, 0, w, h);
-    ctx.font = '14px "JetBrains Mono", monospace';
-
-    columns.forEach(col => {
-      col.y += col.speed;
-      if (col.y > h + 100) col.y = -100;
-
-      col.chars.forEach((ch, idx) => {
-        const y = col.y + idx * 20;
-        if (y < 0 || y > h) return;
-        const fade = 1 - Math.abs((y - h / 2) / (h / 2));
-        ctx.fillStyle = `rgba(41, 231, 205, ${Math.max(0.05, fade * 0.55)})`;
-        ctx.fillText(ch, col.x, y);
-      });
+    ctx.clearRect(0, 0, w, h);
+    particles.forEach(p => {
+      p.x += (p.tx - p.x) * p.speed;
+      p.y += (p.ty - p.y) * p.speed;
+      ctx.fillStyle = `rgba(41, 231, 205, ${p.alpha})`;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      ctx.fill();
     });
     requestAnimationFrame(step);
   }
 
-  resize();
-  step();
-  window.addEventListener('resize', resize);
+  img.onload = () => {
+    ready = true;
+    resize();
+    step();
+  };
+  img.onerror = () => {
+    console.warn('brain-canvas : image introuvable, animation de particules désactivée.');
+  };
+  img.src = imgSrc;
+
+  window.addEventListener('resize', () => { if (ready) resize(); });
 })();
