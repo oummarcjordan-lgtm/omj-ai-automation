@@ -65,8 +65,7 @@ window.addEventListener('load', () => {
 
 /* ============================================
    CANVAS "VISAGE IA" — buste stylisé en particules,
-   dessiné en code (pas depuis une photo), avec un
-   cycle continu dispersion / reformation
+   stable, avec scintillement léger + balayage lumineux
    ============================================ */
 (function initBrainCanvas() {
   const canvas = document.getElementById('brain-canvas');
@@ -74,19 +73,18 @@ window.addEventListener('load', () => {
   const ctx = canvas.getContext('2d');
 
   let w, h, particles = [];
-  let cycleStart = performance.now();
-  const CYCLE_MS = 9000;       // durée totale d'un cycle
-  const DISPERSE_MS = 1800;    // durée de la phase "dispersion"
+  let yMin = 0, yMax = 0;
+  let startTime = performance.now();
+  const INTRO_MS = 2000; // durée de l'assemblage initial au chargement
 
   function resize() {
     const rect = canvas.parentElement.getBoundingClientRect();
     w = canvas.width = rect.width;
     h = canvas.height = rect.height;
     buildParticles();
+    startTime = performance.now();
   }
 
-  // Dessine un buste stylisé (tête + épaules) sur un canvas caché,
-  // puis échantillonne les pixels pleins pour placer les particules.
   function buildParticles() {
     const off = document.createElement('canvas');
     off.width = w;
@@ -95,15 +93,13 @@ window.addEventListener('load', () => {
 
     const isMobile = window.innerWidth < 640;
     const cx = isMobile ? w * 0.5 : w * 0.76;
-    const cy = h * (isMobile ? 0.42 : 0.5);
-    const scale = Math.min(w, h) * (isMobile ? 0.34 : 0.46);
+    const cy = h * (isMobile ? 0.4 : 0.5);
+    const scale = Math.min(w, h) * (isMobile ? 0.30 : 0.42);
 
     octx.fillStyle = '#fff';
-    // Tête
     octx.beginPath();
     octx.ellipse(cx, cy - 0.05 * scale, 0.30 * scale, 0.36 * scale, 0, 0, Math.PI * 2);
     octx.fill();
-    // Épaules / buste
     octx.beginPath();
     octx.moveTo(cx - 0.58 * scale, cy + 1.05 * scale);
     octx.quadraticCurveTo(cx - 0.58 * scale, cy + 0.38 * scale, cx - 0.28 * scale, cy + 0.30 * scale);
@@ -113,53 +109,50 @@ window.addEventListener('load', () => {
     octx.fill();
 
     const data = octx.getImageData(0, 0, w, h).data;
-    const gap = isMobile ? 5 : 4;
+    const gap = isMobile ? 6 : 5;
     const next = [];
+    yMin = Infinity; yMax = -Infinity;
     for (let y = 0; y < h; y += gap) {
       for (let x = 0; x < w; x += gap) {
         const i = (y * w + x) * 4;
         if (data[i + 3] < 120) continue; // en dehors de la silhouette
         next.push({
-          tx: x,
-          ty: y,
-          // position de dispersion propre à chaque particule (aléatoire mais fixe)
-          sx: Math.random() * w,
-          sy: Math.random() * h,
-          x, y,
-          size: 0.9 + Math.random() * 1.4,
-          alpha: 0.35 + Math.random() * 0.5,
-          phase: Math.random() * Math.PI * 2, // pour le léger flottement
+          tx: x, ty: y,
+          x: cx + (Math.random() - 0.5) * scale * 3, // point de départ proche (intro)
+          y: cy + (Math.random() - 0.5) * scale * 3,
+          size: 0.8 + Math.random() * 1.2,
+          alpha: 0.22 + Math.random() * 0.28,
+          phase: Math.random() * Math.PI * 2,
         });
+        if (y < yMin) yMin = y;
+        if (y > yMax) yMax = y;
       }
     }
     particles = next;
   }
 
-  function easeInOut(t) { return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; }
+  function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
 
   function step(now) {
     ctx.clearRect(0, 0, w, h);
 
-    const elapsed = (now - cycleStart) % CYCLE_MS;
-    let mix; // 0 = totalement assemblé (visage), 1 = totalement dispersé
-    if (elapsed < DISPERSE_MS) {
-      mix = easeInOut(elapsed / DISPERSE_MS);                // dispersion
-    } else if (elapsed < DISPERSE_MS * 2) {
-      mix = 1 - easeInOut((elapsed - DISPERSE_MS) / DISPERSE_MS); // reformation
-    } else {
-      mix = 0; // reste assemblé un moment avant de recommencer
-    }
+    const introT = easeOut(Math.min(1, (now - startTime) / INTRO_MS));
+    const span = Math.max(1, yMax - yMin);
+    const scanY = yMin + ((Math.sin(now * 0.0004) * 0.5 + 0.5) * span);
 
-    const t = now * 0.001;
     particles.forEach(p => {
-      const floatX = Math.sin(t * 0.6 + p.phase) * 1.2;
-      const floatY = Math.cos(t * 0.5 + p.phase) * 1.2;
-      const targetX = p.tx + (p.sx - p.tx) * mix + floatX;
-      const targetY = p.ty + (p.sy - p.ty) * mix + floatY;
-      p.x += (targetX - p.x) * 0.12;
-      p.y += (targetY - p.y) * 0.12;
+      const floatX = Math.sin(now * 0.0006 + p.phase) * 0.9;
+      const floatY = Math.cos(now * 0.0005 + p.phase) * 0.9;
+      const targetX = p.tx + floatX;
+      const targetY = p.ty + floatY;
+      const pull = introT < 1 ? 0.06 : 0.12;
+      p.x += (targetX - p.x) * pull;
+      p.y += (targetY - p.y) * pull;
 
-      ctx.fillStyle = `rgba(41, 231, 205, ${p.alpha})`;
+      const distToScan = Math.abs(p.ty - scanY);
+      const scanBoost = Math.max(0, 1 - distToScan / 60) * 0.45;
+
+      ctx.fillStyle = `rgba(41, 231, 205, ${Math.min(1, p.alpha + scanBoost)})`;
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
       ctx.fill();
