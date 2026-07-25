@@ -64,104 +64,50 @@ window.addEventListener('load', () => {
 })();
 
 /* ============================================
-   CANVAS "VISAGE IA" — buste stylisé en particules,
-   stable, avec scintillement léger + balayage lumineux
+   CANVAS "CERVEAU NUMÉRIQUE" — binaire structuré
+   (page d'accueil uniquement)
    ============================================ */
 (function initBrainCanvas() {
   const canvas = document.getElementById('brain-canvas');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
-
-  let w, h, particles = [];
-  let yMin = 0, yMax = 0;
-  let startTime = performance.now();
-  const INTRO_MS = 2000; // durée de l'assemblage initial au chargement
+  let w, h, columns;
 
   function resize() {
     const rect = canvas.parentElement.getBoundingClientRect();
     w = canvas.width = rect.width;
     h = canvas.height = rect.height;
-    buildParticles();
-    startTime = performance.now();
+    const colWidth = 22;
+    const count = Math.ceil(w / colWidth);
+    columns = Array.from({ length: count }, (_, i) => ({
+      x: i * colWidth,
+      y: Math.random() * -h,
+      speed: 0.4 + Math.random() * 0.8,
+      chars: Array.from({ length: Math.ceil(h / 20) + 4 }, () => (Math.random() > 0.5 ? '1' : '0')),
+    }));
   }
 
-  function buildParticles() {
-    const off = document.createElement('canvas');
-    off.width = w;
-    off.height = h;
-    const octx = off.getContext('2d');
+  function step() {
+    ctx.fillStyle = 'rgba(6, 12, 18, 0.15)';
+    ctx.fillRect(0, 0, w, h);
+    ctx.font = '14px "JetBrains Mono", monospace';
 
-    const isMobile = window.innerWidth < 640;
-    const cx = isMobile ? w * 0.5 : w * 0.76;
-    const cy = h * (isMobile ? 0.4 : 0.5);
-    const scale = Math.min(w, h) * (isMobile ? 0.30 : 0.42);
+    columns.forEach(col => {
+      col.y += col.speed;
+      if (col.y > h + 100) col.y = -100;
 
-    octx.fillStyle = '#fff';
-    octx.beginPath();
-    octx.ellipse(cx, cy - 0.05 * scale, 0.30 * scale, 0.36 * scale, 0, 0, Math.PI * 2);
-    octx.fill();
-    octx.beginPath();
-    octx.moveTo(cx - 0.58 * scale, cy + 1.05 * scale);
-    octx.quadraticCurveTo(cx - 0.58 * scale, cy + 0.38 * scale, cx - 0.28 * scale, cy + 0.30 * scale);
-    octx.lineTo(cx + 0.28 * scale, cy + 0.30 * scale);
-    octx.quadraticCurveTo(cx + 0.58 * scale, cy + 0.38 * scale, cx + 0.58 * scale, cy + 1.05 * scale);
-    octx.closePath();
-    octx.fill();
-
-    const data = octx.getImageData(0, 0, w, h).data;
-    const gap = isMobile ? 6 : 5;
-    const next = [];
-    yMin = Infinity; yMax = -Infinity;
-    for (let y = 0; y < h; y += gap) {
-      for (let x = 0; x < w; x += gap) {
-        const i = (y * w + x) * 4;
-        if (data[i + 3] < 120) continue; // en dehors de la silhouette
-        next.push({
-          tx: x, ty: y,
-          x: cx + (Math.random() - 0.5) * scale * 3, // point de départ proche (intro)
-          y: cy + (Math.random() - 0.5) * scale * 3,
-          size: 0.8 + Math.random() * 1.2,
-          alpha: 0.22 + Math.random() * 0.28,
-          phase: Math.random() * Math.PI * 2,
-        });
-        if (y < yMin) yMin = y;
-        if (y > yMax) yMax = y;
-      }
-    }
-    particles = next;
-  }
-
-  function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
-
-  function step(now) {
-    ctx.clearRect(0, 0, w, h);
-
-    const introT = easeOut(Math.min(1, (now - startTime) / INTRO_MS));
-    const span = Math.max(1, yMax - yMin);
-    const scanY = yMin + ((Math.sin(now * 0.0004) * 0.5 + 0.5) * span);
-
-    particles.forEach(p => {
-      const floatX = Math.sin(now * 0.0006 + p.phase) * 0.9;
-      const floatY = Math.cos(now * 0.0005 + p.phase) * 0.9;
-      const targetX = p.tx + floatX;
-      const targetY = p.ty + floatY;
-      const pull = introT < 1 ? 0.06 : 0.12;
-      p.x += (targetX - p.x) * pull;
-      p.y += (targetY - p.y) * pull;
-
-      const distToScan = Math.abs(p.ty - scanY);
-      const scanBoost = Math.max(0, 1 - distToScan / 60) * 0.45;
-
-      ctx.fillStyle = `rgba(41, 231, 205, ${Math.min(1, p.alpha + scanBoost)})`;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-      ctx.fill();
+      col.chars.forEach((ch, idx) => {
+        const y = col.y + idx * 20;
+        if (y < 0 || y > h) return;
+        const fade = 1 - Math.abs((y - h / 2) / (h / 2));
+        ctx.fillStyle = `rgba(41, 231, 205, ${Math.max(0.05, fade * 0.55)})`;
+        ctx.fillText(ch, col.x, y);
+      });
     });
-
     requestAnimationFrame(step);
   }
 
   resize();
-  requestAnimationFrame(step);
+  step();
   window.addEventListener('resize', resize);
 })();
