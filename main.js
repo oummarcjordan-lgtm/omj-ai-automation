@@ -7,7 +7,7 @@ window.addEventListener('load', () => {
 });
 
 /* ============================================
-   CANVAS DE FOND — noeuds connectés
+   CANVAS DE FOND — reseau de noeuds (discret)
    ============================================ */
 (function initNodeCanvas() {
   const canvas = document.getElementById('node-canvas');
@@ -20,7 +20,7 @@ window.addEventListener('load', () => {
     h = canvas.height = window.innerHeight;
   }
   function makeNodes() {
-    const count = window.innerWidth < 640 ? 22 : 42;
+    const count = window.innerWidth < 640 ? 18 : 34;
     nodes = Array.from({ length: count }, () => ({
       x: Math.random() * w,
       y: Math.random() * h,
@@ -40,7 +40,7 @@ window.addEventListener('load', () => {
         const a = nodes[i], b = nodes[j];
         const d = Math.hypot(a.x - b.x, a.y - b.y);
         if (d < 160) {
-          ctx.strokeStyle = `rgba(41, 231, 205, ${0.12 * (1 - d / 160)})`;
+          ctx.strokeStyle = `rgba(24, 169, 87, ${0.12 * (1 - d / 160)})`;
           ctx.lineWidth = 1;
           ctx.beginPath();
           ctx.moveTo(a.x, a.y);
@@ -50,7 +50,7 @@ window.addEventListener('load', () => {
       }
     }
     nodes.forEach(n => {
-      ctx.fillStyle = 'rgba(41, 231, 205, 0.7)';
+      ctx.fillStyle = 'rgba(24, 169, 87, 0.7)';
       ctx.beginPath();
       ctx.arc(n.x, n.y, 1.6, 0, Math.PI * 2);
       ctx.fill();
@@ -64,50 +64,65 @@ window.addEventListener('load', () => {
 })();
 
 /* ============================================
-   CANVAS "CERVEAU NUMÉRIQUE" — binaire structuré
-   (page d'accueil uniquement)
+   VIDEO HERO — adaptatif selon la connexion
+   + fondu progressif au scroll
    ============================================ */
-(function initBrainCanvas() {
-  const canvas = document.getElementById('brain-canvas');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  let w, h, columns;
+(function initHeroVideo() {
+  const video = document.getElementById('heroVideo');
+  const fallbackImg = document.getElementById('heroFallbackImg');
+  const hero = document.getElementById('hero');
+  if (!video || !fallbackImg || !hero) return;
 
-  function resize() {
-    const rect = canvas.parentElement.getBoundingClientRect();
-    w = canvas.width = rect.width;
-    h = canvas.height = rect.height;
-    const colWidth = 22;
-    const count = Math.ceil(w / colWidth);
-    columns = Array.from({ length: count }, (_, i) => ({
-      x: i * colWidth,
-      y: Math.random() * -h,
-      speed: 0.4 + Math.random() * 0.8,
-      chars: Array.from({ length: Math.ceil(h / 20) + 4 }, () => (Math.random() > 0.5 ? '1' : '0')),
-    }));
+  function useFallbackImage() {
+    video.pause();
+    video.style.display = 'none';
+    fallbackImg.style.display = 'block';
   }
 
-  function step() {
-    ctx.fillStyle = 'rgba(6, 12, 18, 0.15)';
-    ctx.fillRect(0, 0, w, h);
-    ctx.font = '14px "JetBrains Mono", monospace';
-
-    columns.forEach(col => {
-      col.y += col.speed;
-      if (col.y > h + 100) col.y = -100;
-
-      col.chars.forEach((ch, idx) => {
-        const y = col.y + idx * 20;
-        if (y < 0 || y > h) return;
-        const fade = 1 - Math.abs((y - h / 2) / (h / 2));
-        ctx.fillStyle = `rgba(41, 231, 205, ${Math.max(0.05, fade * 0.55)})`;
-        ctx.fillText(ch, col.x, y);
-      });
-    });
-    requestAnimationFrame(step);
+  // 1) Detection de connexion lente / economie de donnees
+  const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+  const slowTypes = ['slow-2g', '2g', '3g'];
+  if (conn && (conn.saveData || slowTypes.includes(conn.effectiveType))) {
+    useFallbackImage();
+  } else {
+    // 2) Si la video met trop de temps a charger ou echoue, on bascule sur l'image
+    let switched = false;
+    const loadTimeout = setTimeout(() => {
+      if (video.readyState < 2 && !switched) { switched = true; useFallbackImage(); }
+    }, 4000);
+    video.addEventListener('canplay', () => clearTimeout(loadTimeout));
+    video.addEventListener('error', () => { if (!switched) { switched = true; useFallbackImage(); } });
   }
 
-  resize();
-  step();
-  window.addEventListener('resize', resize);
+  // 3) Fondu progressif au scroll (le fond s'estompe en descendant la page)
+  function onScroll() {
+    const heroHeight = hero.offsetHeight || window.innerHeight;
+    const progress = Math.min(1, window.scrollY / (heroHeight * 0.8));
+    const opacity = 0.55 * (1 - progress) + 0.08 * progress;
+    video.style.opacity = opacity;
+    fallbackImg.style.opacity = opacity;
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+
+/* ============================================
+   MENU MOBILE — hamburger / tiroir
+   ============================================ */
+(function initMobileNav() {
+  const burger = document.getElementById('navBurger');
+  const drawer = document.getElementById('navDrawer');
+  const scrim = document.getElementById('navScrim');
+  if (!burger || !drawer || !scrim) return;
+
+  function toggle(open) {
+    burger.classList.toggle('open', open);
+    drawer.classList.toggle('open', open);
+    scrim.classList.toggle('open', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+
+  burger.addEventListener('click', () => toggle(!drawer.classList.contains('open')));
+  scrim.addEventListener('click', () => toggle(false));
+  drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', () => toggle(false)));
 })();

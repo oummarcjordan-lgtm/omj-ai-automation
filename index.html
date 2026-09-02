@@ -23,20 +23,32 @@
     <a href="index.html" class="logo">OMJ<span class="logo-dot">.</span></a>
     <div class="nav-links">
       <a href="services.html">Services</a>
-      <a href="projets.html">Projets</a>
       <a href="guides.html">Guides</a>
       <a href="profil.html">Profil</a>
       <a href="contact.html" class="nav-cta">Me contacter</a>
     </div>
+    <button class="nav-burger" id="navBurger" aria-label="Ouvrir le menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
 
-<header class="photo-hero">
-  <div class="photo-hero-bg" style="background-image:url('images/hero-accueil.png')"></div>
-  <canvas id="brain-canvas" data-particle-src="images/hero-accueil.png"></canvas>
-  <div class="photo-hero-overlay"></div>
-  <div class="photo-hero-content">
-    <p class="eyebrow">IT, Digital &amp; Automatisation IA — Yaoundé, Cameroun</p>
+<div class="nav-scrim" id="navScrim"></div>
+<div class="nav-drawer" id="navDrawer">
+  <a href="services.html">Services</a>
+  <a href="guides.html">Guides</a>
+  <a href="profil.html">Profil</a>
+  <a href="contact.html" class="nav-drawer-cta">Me contacter</a>
+</div>
+
+<header class="video-hero" id="hero">
+  <video id="heroVideo" class="hero-media" autoplay muted loop playsinline poster="images/hero-fallback.jpg">
+    <source src="videos/logo-hero.mp4" type="video/mp4">
+  </video>
+  <img id="heroFallbackImg" class="hero-media" src="images/hero-fallback.jpg" alt="" style="display:none;">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="eyebrow">IT, Digital & Automatisation IA — Yaoundé, Cameroun</p>
     <h1 class="hero-title">Un problème numérique ?<br><span class="accent">Une solution qui marche.</span></h1>
     <p class="hero-sub">Sites web, applications mobiles, automatisation IA, design graphique et cybersécurité — une seule adresse pour digitaliser sérieusement votre activité.</p>
     <div class="hero-actions">
@@ -49,39 +61,36 @@
 <section id="flow">
   <p class="section-eyebrow">Ma méthode</p>
   <h2 class="section-title">De votre besoin à la solution livrée.</h2>
-  <div class="hero-flow">
-    <div class="flow-node">
-      <span class="flow-label">INPUT</span>
-      <span class="flow-value">Votre besoin</span>
+  <div class="how-steps">
+    <div class="how-step">
+      <span class="how-step-num">1</span>
+      <h3>Vous m'exposez votre besoin</h3>
+      <p>Un échange rapide pour comprendre votre activité et ce qui vous fait perdre du temps.</p>
     </div>
-    <div class="flow-line flow-line-1"></div>
-    <div class="flow-node flow-process">
-      <span class="flow-label">AUTOMATE</span>
-      <span class="flow-value">OMJ Web Développement</span>
+    <div class="how-step">
+      <span class="how-step-num">2</span>
+      <h3>Je conçois la solution</h3>
+      <p>Site, application ou automatisation, pensée pour votre contexte, pas un modèle générique.</p>
     </div>
-    <div class="flow-line flow-line-2"></div>
-    <div class="flow-node flow-output">
-      <span class="flow-label">OUTPUT</span>
-      <span class="flow-value">Solution livrée</span>
+    <div class="how-step">
+      <span class="how-step-num">3</span>
+      <h3>Vous recevez un outil qui marche</h3>
+      <p>Livré, testé, avec un suivi après la mise en ligne.</p>
     </div>
   </div>
 </section>
 
 <section id="teaser">
   <p class="section-eyebrow">Explorer</p>
-  <h2 class="section-title">Trois façons de travailler avec moi.</h2>
+  <h2 class="section-title">Deux façons de travailler avec moi.</h2>
   <div class="card-grid" style="margin-top:48px;">
     <a href="services.html" class="price-card">
       <h4>Services</h4>
       <p class="price-desc">Web, apps, IA &amp; automatisation, design, réseau &amp; cybersécurité, consultation — tarifs détaillés.</p>
     </a>
-    <a href="projets.html" class="price-card">
-      <h4>Projets</h4>
-      <p class="price-desc">Des réalisations concrètes pour des clients réels, au Cameroun et ailleurs.</p>
-    </a>
     <a href="guides.html" class="price-card">
       <h4>Guides</h4>
-      <p class="price-desc">8 guides pratiques pour apprendre l'IA, l'automatisation, le développement et l'entrepreneuriat digital.</p>
+      <p class="price-desc">Des guides pratiques pour apprendre l'IA, l'automatisation, le développement et l'entrepreneuriat digital.</p>
     </a>
   </div>
 </section>
@@ -101,10 +110,14 @@
   </div>
 </section>
 
+<a href="https://wa.me/237688578748" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Discuter sur WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M12.04 2c-5.46 0-9.9 4.44-9.9 9.9 0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.9-4.44 9.9-9.9 0-2.64-1.03-5.13-2.9-7C17.19 3.03 14.68 2 12.04 2zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.24 8.24 0 1 1 6.99 3.86zm4.52-6.17c-.25-.12-1.47-.72-1.7-.81-.23-.08-.4-.12-.56.13-.17.25-.65.81-.79.97-.15.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.48-1.39-1.73-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.15.16-.25.25-.42.08-.17.04-.31-.02-.44-.06-.12-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43-.14-.01-.31-.01-.48-.01-.17 0-.44.06-.67.31-.23.25-.87.85-.87 2.08 0 1.23.89 2.42 1.02 2.58.12.17 1.75 2.67 4.24 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.15-1.18-.06-.1-.23-.16-.48-.28z"/></svg>
+</a>
+
 <footer class="footer">
-  <p>OMJ Web Développement — Yaoundé, Cameroun · 688 578 748 · oummarcjordan@gmail.com</p>
+  <p>OMJ Web Développement — Yaoundé, Cameroun · 688 578 748 · omjwebdeveloppement@gmail.com · contact@omjweb-dev.site</p>
 </footer>
 
 <script src="main.js"></script>
 </body>
-                                         </html>
+</html>
