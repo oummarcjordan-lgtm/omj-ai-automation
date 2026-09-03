@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Contact — OMJ Web Développement</title>
-<meta name="description" content="Contactez Marc Jordan Oum, OMJ Web Développement — WhatsApp, email, Yaoundé, Cameroun.">
+<meta name="description" content="Contactez Marc Jordan Oum, OMJ Web Développement — WhatsApp, email, téléphone, Yaoundé, Cameroun.">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
@@ -15,29 +15,35 @@
   <p class="loader-text">Chargement…</p>
 </div>
 
-<canvas id="node-canvas"></canvas>
-
 <nav class="nav">
   <div class="nav-inner">
     <a href="index.html" class="logo">OMJ<span class="logo-dot">.</span></a>
     <div class="nav-links">
       <a href="services.html">Services</a>
-      <a href="projets.html">Projets</a>
       <a href="guides.html">Guides</a>
       <a href="profil.html">Profil</a>
       <a href="contact.html" class="nav-cta active">Me contacter</a>
     </div>
+    <button class="nav-burger" id="navBurger" aria-label="Ouvrir le menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
 
-<header class="photo-hero" style="min-height:70svh;">
-  <div class="photo-hero-bg" style="background-image:url('images/hero-contact.png')"></div>
-  <div class="photo-hero-overlay"></div>
-  <div class="photo-hero-content">
-    <p class="eyebrow">Parlons de votre projet</p>
-    <h1 class="hero-title">Une question ?<br><span class="accent">Une réponse rapide.</span></h1>
-    <p class="hero-sub">Décrivez votre besoin — je réponds généralement sous 24h.</p>
-  </div>
+<div class="nav-scrim" id="navScrim"></div>
+<div class="nav-drawer" id="navDrawer">
+  <a href="services.html">Services</a>
+  <a href="guides.html">Guides</a>
+  <a href="profil.html">Profil</a>
+  <a href="contact.html" class="nav-drawer-cta active">Me contacter</a>
+</div>
+
+<a href="javascript:history.back()" class="back-btn" aria-label="Retour">←</a>
+
+<header class="page-hero">
+  <p class="eyebrow">Parlons de votre projet</p>
+  <h1 class="hero-title">Une question ?<br><span class="accent">Une réponse rapide.</span></h1>
+  <p class="hero-sub">Décrivez votre besoin — je réponds généralement sous 24h.</p>
 </header>
 
 <section id="contact">
@@ -49,11 +55,18 @@
         <span class="contact-btn-value">+237 688 578 748</span>
       </span>
     </a>
-    <a href="mailto:oummarcjordan@gmail.com" class="contact-btn">
+    <a href="tel:+237688578748" class="contact-btn">
+      <span class="contact-btn-icon">☎</span>
+      <span class="contact-btn-text">
+        <span class="contact-btn-label">Téléphone</span>
+        <span class="contact-btn-value">+237 688 578 748</span>
+      </span>
+    </a>
+    <a href="mailto:contact@omjweb-dev.site" class="contact-btn">
       <span class="contact-btn-icon">✉</span>
       <span class="contact-btn-text">
         <span class="contact-btn-label">Email</span>
-        <span class="contact-btn-value">oummarcjordan@gmail.com</span>
+        <span class="contact-btn-value">contact@omjweb-dev.site</span>
       </span>
     </a>
   </div>
@@ -61,9 +74,19 @@
 </section>
 
 <footer class="footer">
-  <p>OMJ Web Développement — Yaoundé, Cameroun · 688 578 748 · oummarcjordan@gmail.com</p>
+  <p>OMJ Web Développement — Yaoundé, Cameroun · 688 578 748 · omjwebdeveloppement@gmail.com · contact@omjweb-dev.site</p>
+  <div class="social-links">
+    <a href="https://www.facebook.com/profile.php?id=61590940675286" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.23.2 2.23.2v2.45h-1.26c-1.24 0-1.62.77-1.62 1.56V12h2.77l-.44 2.89h-2.33v6.99A10 10 0 0 0 22 12z"/></svg>
+      Facebook
+    </a>
+    <a href="https://wa.me/237688578748" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M12.04 2c-5.46 0-9.9 4.44-9.9 9.9 0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.9-4.44 9.9-9.9 0-2.64-1.03-5.13-2.9-7C17.19 3.03 14.68 2 12.04 2zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.24 8.24 0 1 1 6.99 3.86z"/></svg>
+      WhatsApp
+    </a>
+  </div>
 </footer>
 
 <script src="main.js"></script>
 </body>
-      </html>
+</html>

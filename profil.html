@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Profil — Marc Jordan Oum | OMJ Web Développement</title>
-<meta name="description" content="Parcours de Marc Jordan Oum : BTS Informatique, expériences chez Orange Cameroun, DHL et en centre d'appel, aujourd'hui freelance IT &amp; IA à Yaoundé.">
+<meta name="description" content="Parcours de Marc Jordan Oum : BTS Informatique, expériences chez Orange Cameroun et en centre d'appel, aujourd'hui freelance IT & IA à Yaoundé.">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
@@ -15,35 +15,41 @@
   <p class="loader-text">Chargement…</p>
 </div>
 
-<canvas id="node-canvas"></canvas>
-
 <nav class="nav">
   <div class="nav-inner">
     <a href="index.html" class="logo">OMJ<span class="logo-dot">.</span></a>
     <div class="nav-links">
       <a href="services.html">Services</a>
-      <a href="projets.html">Projets</a>
       <a href="guides.html">Guides</a>
       <a href="profil.html" class="active">Profil</a>
       <a href="contact.html" class="nav-cta">Me contacter</a>
     </div>
+    <button class="nav-burger" id="navBurger" aria-label="Ouvrir le menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
 
-<header class="photo-hero" style="min-height:70svh;">
-  <div class="photo-hero-bg" style="background-image:url('images/hero-profil.png')"></div>
-  <div class="photo-hero-overlay"></div>
-  <div class="photo-hero-content">
-    <p class="eyebrow">Qui je suis</p>
-    <h1 class="hero-title">Marc Jordan Oum<br><span class="accent">Discipline. Focus. Exécution.</span></h1>
-  </div>
+<div class="nav-scrim" id="navScrim"></div>
+<div class="nav-drawer" id="navDrawer">
+  <a href="services.html">Services</a>
+  <a href="guides.html">Guides</a>
+  <a href="profil.html" class="active">Profil</a>
+  <a href="contact.html" class="nav-drawer-cta">Me contacter</a>
+</div>
+
+<a href="javascript:history.back()" class="back-btn" aria-label="Retour">←</a>
+
+<header class="page-hero">
+  <p class="eyebrow">Qui je suis</p>
+  <h1 class="hero-title">Marc Jordan Oum<br><span class="accent">Discipline. Focus. Exécution.</span></h1>
 </header>
 
 <section id="profil">
   <p class="section-eyebrow">Résumé</p>
   <h2 class="section-title">Mon parcours en bref.</h2>
   <div class="profile-block">
-    <p class="profile-summary">Titulaire d'un BTS en Informatique de l'IUC Douala, j'ai construit mon expérience professionnelle entre le monde de l'entreprise (Orange Cameroun, DHL, centre d'appel) et le freelancing digital, avant de fonder OMJ Web Développement — opéré entièrement depuis un smartphone Android, sans bureau ni ordinateur portable.</p>
+    <p class="profile-summary">Titulaire d'un BTS en Informatique de l'IUC Douala, j'ai construit mon expérience professionnelle entre le monde de l'entreprise (Orange Cameroun, centre d'appel) et le freelancing digital, avant de fonder OMJ Web Développement — opéré entièrement depuis un smartphone Android, sans bureau ni ordinateur portable.</p>
 
     <div class="timeline">
       <div class="timeline-item">
@@ -51,8 +57,12 @@
         <span>IUC Douala</span>
       </div>
       <div class="timeline-item">
-        <h4>Expérience en entreprise</h4>
-        <span>Orange Cameroun, DHL, Centre d'appel</span>
+        <h4>Stagiaire technicien informatique</h4>
+        <span>Orange Cameroun, Akwa (Douala)</span>
+      </div>
+      <div class="timeline-item">
+        <h4>Téléconseiller B2B</h4>
+        <span>Call Center CALL VIP, Tsinga (Yaoundé)</span>
       </div>
       <div class="timeline-item">
         <h4>Fondateur — OMJ Web Développement</h4>
@@ -62,8 +72,22 @@
   </div>
 </section>
 
+<a href="https://wa.me/237688578748" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Discuter sur WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M12.04 2c-5.46 0-9.9 4.44-9.9 9.9 0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.9-4.44 9.9-9.9 0-2.64-1.03-5.13-2.9-7C17.19 3.03 14.68 2 12.04 2zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.24 8.24 0 1 1 6.99 3.86zm4.52-6.17c-.25-.12-1.47-.72-1.7-.81-.23-.08-.4-.12-.56.13-.17.25-.65.81-.79.97-.15.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.48-1.39-1.73-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.15.16-.25.25-.42.08-.17.04-.31-.02-.44-.06-.12-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43-.14-.01-.31-.01-.48-.01-.17 0-.44.06-.67.31-.23.25-.87.85-.87 2.08 0 1.23.89 2.42 1.02 2.58.12.17 1.75 2.67 4.24 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.15-1.18-.06-.1-.23-.16-.48-.28z"/></svg>
+</a>
+
 <footer class="footer">
-  <p>OMJ Web Développement — Yaoundé, Cameroun · 688 578 748 · oummarcjordan@gmail.com</p>
+  <p>OMJ Web Développement — Yaoundé, Cameroun · 688 578 748 · omjwebdeveloppement@gmail.com · contact@omjweb-dev.site</p>
+  <div class="social-links">
+    <a href="https://www.facebook.com/profile.php?id=61590940675286" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.23.2 2.23.2v2.45h-1.26c-1.24 0-1.62.77-1.62 1.56V12h2.77l-.44 2.89h-2.33v6.99A10 10 0 0 0 22 12z"/></svg>
+      Facebook
+    </a>
+    <a href="https://wa.me/237688578748" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M12.04 2c-5.46 0-9.9 4.44-9.9 9.9 0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.9-4.44 9.9-9.9 0-2.64-1.03-5.13-2.9-7C17.19 3.03 14.68 2 12.04 2zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.24 8.24 0 1 1 6.99 3.86z"/></svg>
+      WhatsApp
+    </a>
+  </div>
 </footer>
 
 <script src="main.js"></script>
