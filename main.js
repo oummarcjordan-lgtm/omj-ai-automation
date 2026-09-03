@@ -7,63 +7,6 @@ window.addEventListener('load', () => {
 });
 
 /* ============================================
-   CANVAS DE FOND — reseau de noeuds (discret)
-   ============================================ */
-(function initNodeCanvas() {
-  const canvas = document.getElementById('node-canvas');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  let w, h, nodes;
-
-  function resize() {
-    w = canvas.width = window.innerWidth;
-    h = canvas.height = window.innerHeight;
-  }
-  function makeNodes() {
-    const count = window.innerWidth < 640 ? 18 : 34;
-    nodes = Array.from({ length: count }, () => ({
-      x: Math.random() * w,
-      y: Math.random() * h,
-      vx: (Math.random() - 0.5) * 0.25,
-      vy: (Math.random() - 0.5) * 0.25,
-    }));
-  }
-  function step() {
-    ctx.clearRect(0, 0, w, h);
-    nodes.forEach(n => {
-      n.x += n.vx; n.y += n.vy;
-      if (n.x < 0 || n.x > w) n.vx *= -1;
-      if (n.y < 0 || n.y > h) n.vy *= -1;
-    });
-    for (let i = 0; i < nodes.length; i++) {
-      for (let j = i + 1; j < nodes.length; j++) {
-        const a = nodes[i], b = nodes[j];
-        const d = Math.hypot(a.x - b.x, a.y - b.y);
-        if (d < 160) {
-          ctx.strokeStyle = `rgba(24, 169, 87, ${0.12 * (1 - d / 160)})`;
-          ctx.lineWidth = 1;
-          ctx.beginPath();
-          ctx.moveTo(a.x, a.y);
-          ctx.lineTo(b.x, b.y);
-          ctx.stroke();
-        }
-      }
-    }
-    nodes.forEach(n => {
-      ctx.fillStyle = 'rgba(24, 169, 87, 0.7)';
-      ctx.beginPath();
-      ctx.arc(n.x, n.y, 1.6, 0, Math.PI * 2);
-      ctx.fill();
-    });
-    requestAnimationFrame(step);
-  }
-  resize();
-  makeNodes();
-  step();
-  window.addEventListener('resize', () => { resize(); makeNodes(); });
-})();
-
-/* ============================================
    VIDEO HERO — adaptatif selon la connexion
    + fondu progressif au scroll
    ============================================ */
